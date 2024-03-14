@@ -1,16 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-export default function DarkModeSwitcher() {
-  const isBrowser = typeof window !== "undefined";
-
-  const [darkMode, setDarkMode] = useState<boolean>(
-    isBrowser ? localStorage.getItem("darkMode") === "true" : false
-  );
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+export default function DarkModeSwitcher({darkMode, setDarkMode}) {
 
   useEffect(() => {
     if (darkMode) {
@@ -25,8 +17,8 @@ export default function DarkModeSwitcher() {
     <motion.div
       initial={darkMode ? "dark" : "light"}
       animate={darkMode ? "dark" : "light"}
-      className="rounded-full bg-gray-300 w-14 h-8 flex items-center justify-start p-1 dark:bg-gray-700"
-      onClick={toggleDarkMode}
+      className="rounded-full bg-gray-300 w-14 h-8 flex items-center justify-start p-1 dark:bg-gray-700 cursor-pointer"
+      onClick={setDarkMode}
     >
       <motion.div
         initial={darkMode ? "dark" : "light"}

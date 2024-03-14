@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import BannerContainer from "./components/Banner/BannerContainer";
-import FormContainer from "./components/Form/FormContainer";
+import LoginContainer from "./components/Login/LoginContainer";
 
 export default function App() {
   const images = ["banner.png", "banner.png", "banner.png"];
@@ -18,7 +18,7 @@ export default function App() {
         currentIndex={currentImage}
         setCurrentIndex={setCurrentImage}
       />
-      <FormContainer bannerOpen={bannerOpen} setBannerOpen={setBannerOpen} />
+      <LoginContainer bannerOpen={bannerOpen} setBannerOpen={setBannerOpen} />
     </div>
   );
 }

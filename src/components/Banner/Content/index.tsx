@@ -1,13 +1,5 @@
-import React from "react";
-
-function Content() {
+export default function Content() {
   return (
-    // <div className="absolute bottom-14 mx-5 flex flex-col items-center justify-center text-white">
-    // </div>
-
-    //   <div className="flex flex-col gap-4">
-    //   </div>
-
     <>
       <div className="flex justify-start items-center">
         <span className="px-4 py-2 rounded-full bg-blue-700 text-sm">
@@ -28,5 +20,3 @@ function Content() {
     </>
   );
 }
-
-export default Content;
