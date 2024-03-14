@@ -1,6 +1,11 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { ImagePaginationProps } from "../../../screens/login/types";
 
-function ImagePagination({ totalImages, currentIndex, changeImage }: { totalImages: number, currentIndex: number, changeImage: (index: number) => void }) {
+export default function ImagePagination({
+  totalImages,
+  currentIndex,
+  changeImage,
+}: ImagePaginationProps) {
   return (
     <div className="flex items-center justify-start  w-full mt-10 ">
       <div className="flex items-center justify-center w-1/3 gap-3 ">
@@ -41,5 +46,3 @@ function ImagePagination({ totalImages, currentIndex, changeImage }: { totalImag
     </div>
   );
 }
-
-export default ImagePagination;

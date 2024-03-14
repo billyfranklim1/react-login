@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { DarkModeSwitcherProps } from "../../screens/login/types";
 
-export default function DarkModeSwitcher({darkMode, setDarkMode}) {
-
+export default function DarkModeSwitcher({
+  darkMode,
+  setDarkMode,
+}: DarkModeSwitcherProps) {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");

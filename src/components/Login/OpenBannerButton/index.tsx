@@ -1,6 +1,7 @@
 import { IoIosArrowForward } from "react-icons/io";
+import { CloseBannerButtonProps } from "../../../screens/login/types";
 
-function CloseBannerButton({ setBannerOpen }) {
+function CloseBannerButton({ setBannerOpen }: CloseBannerButtonProps) {
   return (
     <div className="absolute left-5 hidden lg:block md:block">
       <button

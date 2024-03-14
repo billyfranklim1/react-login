@@ -8,7 +8,12 @@ import OpenBannerButton from "../OpenBannerButton";
 import LoginHeader from "../LoginHeader";
 import WelcomeMessage from "../WelcomeMessage";
 
-export default function LoginContainer({ bannerOpen, setBannerOpen }) {
+import { LoginContainerProps } from "../../../screens/login/types";
+
+export default function LoginContainer({
+  bannerOpen,
+  setBannerOpen,
+}: LoginContainerProps) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
