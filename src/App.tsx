@@ -11,6 +11,8 @@ import {
 
 import { FaApple, FaGithub, FaTwitter } from "react-icons/fa6";
 
+import DarkModeSwitcher from "./components/DarkModeSwitcher";
+
 export default function App() {
   const images = ["banner.png", "banner.png", "banner.png"];
 
@@ -23,19 +25,6 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      // salvar no localstorage
-      localStorage.setItem("darkMode", "true");
-    } else {
-      document.documentElement.classList.remove("dark");
-      // salvar no localstorage
-      localStorage.setItem("darkMode", "false");
-    }
-  }, [darkMode]);
-
-  // verificar se o dark mode está ativo
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode");
     if (isDarkMode === "true") {
@@ -155,7 +144,10 @@ export default function App() {
         )}
 
         <div className={`${bannerOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
-          <div className="mt-10 flex justify-between">
+          <div className="absolute right-5 top-5" >
+            <DarkModeSwitcher />
+          </div>
+          <div className="mt-16 flex justify-between">
             <img
               alt=""
               className="h-8"
@@ -259,9 +251,6 @@ export default function App() {
               <span className="text-blue-600">Recuperar senha</span>
             </a>
           </div>
-          <button onClick={() => setDarkMode(!darkMode)}>
-            Toggle Dark Mode
-          </button>
         </div>
       </div>
     </div>
