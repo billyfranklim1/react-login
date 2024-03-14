@@ -17,8 +17,6 @@ import * as Yup from "yup";
 import DarkModeSwitcher from "./components/DarkModeSwitcher";
 import { useLogin } from "./screens/login/hooks/useLogin";
 
-import BannerContainer from "./components/Banner/BannerContainer";
-
 export default function App() {
   const images = ["banner.png", "banner.png", "banner.png"];
 
@@ -26,6 +24,10 @@ export default function App() {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const { loginMutation: login } = useLogin();
 
@@ -53,13 +55,92 @@ export default function App() {
 
   return (
     <div className="flex h-screen w-screen justify-center">
-      <BannerContainer
-        images={images}
-        bannerOpen={bannerOpen}
-        setBannerOpen={setBannerOpen}
-        currentIndex={currentImage}
-        setCurrentIndex={setCurrentImage}
-      />
+      <div
+        className={`bg-cover ${
+          bannerOpen ? "w-2/3" : "w-0"
+        }  hidden lg:block md:block`}
+        style={{
+          backgroundImage: `url(${images[currentImage]})`,
+          transition: "background-image 0.5s ease-in-out",
+        }}
+      >
+        {bannerOpen && (
+          <div className="relative h-full">
+            <div className="absolute w-full px-5 py-5 flex justify-start">
+              <button
+                className="w-10 h-10 flex items-center justify-center border rounded-full text-white bg-transparent border-white  hover:border-black hover:text-black"
+                onClick={() => setBannerOpen(!bannerOpen)}
+              >
+                <IoIosArrowBack />
+              </button>
+            </div>
+            <div className="absolute bottom-14 mx-5 flex flex-col items-center justify-center text-white">
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-start items-center">
+                  <span className="px-4 py-2 rounded-full bg-blue-700 text-sm">
+                    Cursos
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-base font-semibold my-4">
+                    Plataforma de cursos completa
+                  </h3>
+                  <p className="font-medium text-gray-400">
+                    Lorem ipsum nisl etiam himenaeos ligula augue vehicula
+                    gravida tincidunt, etiam magna sapien gravida sodales sed
+                    vel pulvinar suspendisse, morbi mi proin urna ornare posuere
+                    donec aptent. orci vivamus primis fusce lacinia libero
+                    nostra aliquam vestibulum
+                  </p>
+                </div>
+                <div className="flex items-center justify-center gap-4 mt-10">
+                  <div className="flex items-center justify-center gap-3 w-1/3">
+                    {Array(3)
+                      .fill(0)
+                      .map((_, i) => (
+                        <div
+                          key={i}
+                          className={`h-1 rounded w-1/3 ${
+                            i === currentImage ? "bg-white" : "bg-gray-500"
+                          } cursor-pointer hover:bg-white`}
+                          onClick={() => setCurrentImage(i)}
+                        ></div>
+                      ))}
+                  </div>
+                  <div className="flex items-center justify-end w-2/3 h-10">
+                    <IoIosArrowBack
+                      size={30}
+                      className={`cursor-pointer ${
+                        currentImage === 0 ? "text-gray-400" : "text-white"
+                      }`}
+                      onClick={() => {
+                        if (currentImage !== 0) {
+                          setCurrentImage(
+                            (currentImage - 1 + images.length) % images.length
+                          );
+                        }
+                      }}
+                    />
+                    <IoIosArrowForward
+                      size={30}
+                      className={`cursor-pointer ${
+                        currentImage === images.length - 1
+                          ? "text-gray-400"
+                          : "text-white"
+                      }`}
+                      onClick={() => {
+                        if (currentImage !== images.length - 1) {
+                          setCurrentImage((currentImage + 1) % images.length);
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       <div
         className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800	
         ${bannerOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"} `}
@@ -176,6 +257,7 @@ export default function App() {
                 </div>
               ) : null}
             </div>
+            {error && <div className="text-red-500 mt-2">{error}</div>}
             <div className="mt-4 flex items-center">
               <input type="checkbox" id="stayConnected" className="mr-2" />
               <label htmlFor="stayConnected" className="text-gray-400">
