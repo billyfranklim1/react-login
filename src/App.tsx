@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import {
   MdFacebook,
@@ -17,10 +17,31 @@ export default function App() {
   const [currentImage, setCurrentImage] = useState(0);
   const [bannerOpen, setBannerOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      // salvar no localstorage
+      localStorage.setItem("darkMode", "true");
+    } else {
+      document.documentElement.classList.remove("dark");
+      // salvar no localstorage
+      localStorage.setItem("darkMode", "false");
+    }
+  }, [darkMode]);
+
+  // verificar se o dark mode está ativo
+  useEffect(() => {
+    const isDarkMode = localStorage.getItem("darkMode");
+    if (isDarkMode === "true") {
+      setDarkMode(true);
+    }
+  }, []);
 
   const handleLogin = () => {
     if (!username || !password) {
@@ -45,7 +66,7 @@ export default function App() {
           <div className="relative h-full">
             <div className="absolute w-full px-5 py-5 flex justify-start">
               <button
-                className="w-10 h-10 flex items-center justify-center border rounded-full text-black bg-transparent border-black hover:border-white hover:text-white"
+                className="w-10 h-10 flex items-center justify-center border rounded-full text-white bg-transparent border-white  hover:border-black hover:text-black"
                 onClick={() => setBannerOpen(!bannerOpen)}
               >
                 <IoIosArrowBack />
@@ -119,14 +140,13 @@ export default function App() {
         )}
       </div>
       <div
-        className={`h-full px-10 md:w-full w-full flex justify-center ${
-          bannerOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"
-        } `}
+        className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800	
+        ${bannerOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"} `}
       >
         {!bannerOpen && (
           <div className="absolute left-5 hidden lg:block md:block">
             <button
-              className="mt-5 bg-blue-500 text-white rounded-full w-10 h-10 hover:bg-blue-700 flex items-center justify-center"
+              className="mt-5 bg-blue-500 text-white rounded-full w-10 h-10 hover:bg-blue-700 flex items-center justify-center dark:bg-neutral-800	 dark:text-white"
               onClick={() => setBannerOpen(true)}
             >
               <IoIosArrowForward />
@@ -136,28 +156,34 @@ export default function App() {
 
         <div className={`${bannerOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
           <div className="mt-10 flex justify-between">
-            <img src="logo.png" alt="" className="h-8" />
+            <img
+              alt=""
+              className="h-8"
+              src={` ${darkMode ? "logo-dark.png" : "logo.png"}`}
+            />
             <a href="" className="text-blue-500">
               Criar conta
             </a>
           </div>
           <div className="flex flex-col mt-10">
-            <h1 className="text-3xl font-semibold">Boas-vindas!</h1>
-            <p className="text-lg font-medium text-gray-400 mt-5">
+            <h1 className="text-3xl font-semibold text-neutral-800	 dark:text-white">
+              Boas-vindas!
+            </h1>
+            <p className="text-lg font-medium text-gray-400 mt-5 dark:text-gray-300">
               Entre ultilizando umas das opções abaixo.
             </p>
           </div>
           <div className="flex w-full gap-2 mt-10">
-            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer">
+            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700 dark:text-white">
               <MdFacebook size={20} />
             </div>
-            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer">
+            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700 dark:text-white">
               <FaApple size={20} />
             </div>
-            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer">
+            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700 dark:text-white">
               <FaTwitter size={20} />
             </div>
-            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer">
+            <div className="border-black w-10 h-10 flex flex-1 justify-center items-center border rounded-md hover:bg-gray-100 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700 dark:text-white">
               <FaGithub size={20} />
             </div>
           </div>
@@ -170,12 +196,14 @@ export default function App() {
           <div className="mt-10">
             <label className="block text-gray-400">Usuário</label>
             <div className="mt-2 relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
                 <MdPersonOutline size={20} />
               </span>
               <input
                 type="text"
-                className={`w-full p-2 border ${error ? "border-red-500" : "border-gray-800"} rounded-lg pl-10 focus:outline-none`}
+                className={`w-full p-2 border ${
+                  error ? "border-red-500" : "border-neutral-800	"
+                } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
                 placeholder="Usuário"
                 autoComplete="off"
                 value={username}
@@ -186,19 +214,21 @@ export default function App() {
           <div className="mt-4">
             <label className="block text-gray-400">Senha</label>
             <div className="mt-2 relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
                 <MdLockOutline size={20} />
               </span>
               <input
                 type={showPassword ? "text" : "password"}
-                className={`w-full p-2 border ${error ? "border-red-500" : "border-gray-800"} rounded-lg pl-10 focus:outline-none`}
+                className={`w-full p-2 border ${
+                  error ? "border-red-500" : "border-neutral-800	"
+                } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
                 placeholder="Senha"
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span
-                className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer dark:text-white"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -216,16 +246,22 @@ export default function App() {
               Manter conectado
             </label>
           </div>
-          <button className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center" onClick={handleLogin}>
+          <button
+            className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
+            onClick={handleLogin}
+          >
             <MdInput className="mr-2" />
             Entrar
           </button>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <a href="#" className="text-center text-sm text-gray-400">
               Esqueceu sua senha ? {""}
-              <span className="text-indigo-600">Recuperar senha</span>
+              <span className="text-blue-600">Recuperar senha</span>
             </a>
           </div>
+          <button onClick={() => setDarkMode(!darkMode)}>
+            Toggle Dark Mode
+          </button>
         </div>
       </div>
     </div>
