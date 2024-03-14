@@ -5,23 +5,20 @@ import LoginForm from "../LoginForm";
 import OpenBannerButton from "../OpenBannerButton";
 import LoginHeader from "../LoginHeader";
 import WelcomeMessage from "../WelcomeMessage";
+import { useBanner } from "../../../../../contexts/Banner/BannerContext";
 
-import { LoginContainerProps } from "./../../../types";
-
-export default function LoginContainer({
-  bannerOpen,
-  setBannerOpen,
-}: LoginContainerProps) {
+export default function LoginContainer() {
+  const { isOpen } = useBanner();
 
   return (
     <>
       <div
         className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800	
-        ${bannerOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"} `}
+        ${isOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"} `}
       >
-        {!bannerOpen && <OpenBannerButton setBannerOpen={setBannerOpen} />}
+        {!isOpen && <OpenBannerButton />}
 
-        <div className={`${bannerOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
+        <div className={`${isOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
           <div className="absolute right-5 top-5">
             <DarkModeSwitcher />
           </div>

@@ -1,4 +1,5 @@
 import { DarkModeProvider } from "./DarkMode/DarkModeContext";
+import { BannerProvider } from "./Banner/BannerContext";
 import { ReactQueryProvider } from "./Query";
 
 export default function GlobalProvider({
@@ -8,7 +9,9 @@ export default function GlobalProvider({
 }) {
   return (
     <ReactQueryProvider>
-      <DarkModeProvider>{children}</DarkModeProvider>
+      <DarkModeProvider>
+        <BannerProvider>{children}</BannerProvider>
+      </DarkModeProvider>
     </ReactQueryProvider>
   );
 }

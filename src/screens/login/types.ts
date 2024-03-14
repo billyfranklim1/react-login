@@ -5,15 +5,8 @@ export interface Login {
 
 export interface BannerContainerProps {
   images: string[];
-  bannerOpen: boolean;
   currentIndex: number;
   setCurrentIndex: (index: number) => void;
-  setBannerOpen: (open: boolean) => void;
-}
-
-
-export interface CloseBannerButtonProps {
-  setBannerOpen: (open: boolean) => void;
 }
 
 
@@ -23,11 +16,3 @@ export interface ImagePaginationProps {
   changeImage: (index: number) => void;
 }
 
-export interface LoginContainerProps {
-  bannerOpen: boolean;
-  setBannerOpen: (open: boolean) => void;
-}
-
-export interface CloseBannerButtonProps {
-  setBannerOpen: (open: boolean) => void;
-}
