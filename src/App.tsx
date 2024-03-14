@@ -3,7 +3,7 @@ import LoginContainer from "./screens/login/components/Login/LoginContainer";
 
 export default function App() {
   return (
-    <div className="flex h-screen w-screen justify-center">
+    <div className="flex h-screen w-screen justify-center bg-white dark:bg-neutral-800">
       <BannerContainer />
       <LoginContainer />
     </div>
