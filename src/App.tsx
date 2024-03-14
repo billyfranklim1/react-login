@@ -11,7 +11,11 @@ import {
 
 import { FaApple, FaGithub, FaTwitter } from "react-icons/fa6";
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import DarkModeSwitcher from "./components/DarkModeSwitcher";
+import { useLogin } from "./screens/login/hooks/useLogin";
 
 export default function App() {
   const images = ["banner.png", "banner.png", "banner.png"];
@@ -25,20 +29,29 @@ export default function App() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { loginMutation: login } = useLogin();
+
+  const formik = useFormik({
+    initialValues: { username: "", password: "" },
+    validationSchema: Yup.object({
+      username: Yup.string().required("O usuário é obrigatório"),
+      password: Yup.string()
+        .min(6, "A senha deve ter pelo menos 6 caracteres")
+        .required("A senha é obrigatória"),
+    }),
+    onSubmit: (values) => {
+      login.mutate(values);
+    },
+    validateOnBlur: false,
+    validateOnChange: false,
+  });
+
   useEffect(() => {
     const isDarkMode = localStorage.getItem("darkMode");
     if (isDarkMode === "true") {
       setDarkMode(true);
     }
   }, []);
-
-  const handleLogin = () => {
-    if (!username || !password) {
-      setError("Os campos de usuário e senha são obrigatórios.");
-    } else {
-      setError("");
-    }
-  };
 
   return (
     <div className="flex h-screen w-screen justify-center">
@@ -144,7 +157,7 @@ export default function App() {
         )}
 
         <div className={`${bannerOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
-          <div className="absolute right-5 top-5" >
+          <div className="absolute right-5 top-5">
             <DarkModeSwitcher />
           </div>
           <div className="mt-16 flex justify-between">
@@ -185,66 +198,80 @@ export default function App() {
             <div className="flex-1 border-t border-gray-300"></div>
           </div>
 
-          <div className="mt-10">
-            <label className="block text-gray-400">Usuário</label>
-            <div className="mt-2 relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
-                <MdPersonOutline size={20} />
-              </span>
-              <input
-                type="text"
-                className={`w-full p-2 border ${
-                  error ? "border-red-500" : "border-neutral-800	"
-                } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
-                placeholder="Usuário"
-                autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+          <form onSubmit={formik.handleSubmit}>
+            <div className="mt-10">
+              <label className="block text-gray-400">Usuário</label>
+              <div className="mt-2 relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
+                  <MdPersonOutline size={20} />
+                </span>
+                <input
+                  type="text"
+                  className={`w-full p-2 border ${
+                    formik.touched.username && formik.errors.username
+                      ? "border-red-500"
+                      : "border-neutral-800	"
+                  } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
+                  placeholder="Usuário"
+                  autoComplete="off"
+                  {...formik.getFieldProps("username")}
+                />
+              </div>
+              {formik.touched.username && formik.errors.username ? (
+                <div className="text-red-500 mt-2">
+                  {formik.errors.username}
+                </div>
+              ) : null}
             </div>
-          </div>
-          <div className="mt-4">
-            <label className="block text-gray-400">Senha</label>
-            <div className="mt-2 relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
-                <MdLockOutline size={20} />
-              </span>
-              <input
-                type={showPassword ? "text" : "password"}
-                className={`w-full p-2 border ${
-                  error ? "border-red-500" : "border-neutral-800	"
-                } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
-                placeholder="Senha"
-                autoComplete="off"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <span
-                className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer dark:text-white"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <MdVisibilityOff size={20} />
-                ) : (
-                  <MdVisibility size={20} />
-                )}
-              </span>
+            <div className="mt-4">
+              <label className="block text-gray-400">Senha</label>
+              <div className="mt-2 relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
+                  <MdLockOutline size={20} />
+                </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className={`w-full p-2 border ${
+                    formik.touched.password && formik.errors.password
+                      ? "border-red-500"
+                      : "border-neutral-800	"
+                  } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
+                  placeholder="Senha"
+                  autoComplete="off"
+                  {...formik.getFieldProps("password")}
+                />
+                <span
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer dark:text-white"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? (
+                    <MdVisibilityOff size={20} />
+                  ) : (
+                    <MdVisibility size={20} />
+                  )}
+                </span>
+              </div>
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-red-500 mt-2">
+                  {formik.errors.password}
+                </div>
+              ) : null}
             </div>
-          </div>
-          {error && <div className="text-red-500 mt-2">{error}</div>}
-          <div className="mt-4 flex items-center">
-            <input type="checkbox" id="stayConnected" className="mr-2" />
-            <label htmlFor="stayConnected" className="text-gray-400">
-              Manter conectado
-            </label>
-          </div>
-          <button
-            className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
-            onClick={handleLogin}
-          >
-            <MdInput className="mr-2" />
-            Entrar
-          </button>
+            {error && <div className="text-red-500 mt-2">{error}</div>}
+            <div className="mt-4 flex items-center">
+              <input type="checkbox" id="stayConnected" className="mr-2" />
+              <label htmlFor="stayConnected" className="text-gray-400">
+                Manter conectado
+              </label>
+            </div>
+            <button
+              className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
+              type="submit"
+            >
+              <MdInput className="mr-2" />
+              Entrar
+            </button>
+          </form>
           <div className="mt-10 flex justify-center">
             <a href="#" className="text-center text-sm text-gray-400">
               Esqueceu sua senha ? {""}
