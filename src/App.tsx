@@ -18,6 +18,18 @@ export default function App() {
   const [bannerOpen, setBannerOpen] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    if (!username || !password) {
+      setError("Os campos de usuário e senha são obrigatórios.");
+    } else {
+      setError("");
+    }
+  };
+
   return (
     <div className="flex h-screen w-screen justify-center">
       <div
@@ -163,9 +175,11 @@ export default function App() {
               </span>
               <input
                 type="text"
-                className="w-full p-2 border border-gray-800 rounded-lg pl-10 focus:outline-none"
+                className={`w-full p-2 border ${error ? "border-red-500" : "border-gray-800"} rounded-lg pl-10 focus:outline-none`}
                 placeholder="Usuário"
                 autoComplete="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           </div>
@@ -177,9 +191,11 @@ export default function App() {
               </span>
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full p-2 border border-gray-800 rounded-lg pl-10 focus:outline-none"
+                className={`w-full p-2 border ${error ? "border-red-500" : "border-gray-800"} rounded-lg pl-10 focus:outline-none`}
                 placeholder="Senha"
                 autoComplete="off"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <span
                 className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
@@ -193,13 +209,14 @@ export default function App() {
               </span>
             </div>
           </div>
+          {error && <div className="text-red-500 mt-2">{error}</div>}
           <div className="mt-4 flex items-center">
             <input type="checkbox" id="stayConnected" className="mr-2" />
             <label htmlFor="stayConnected" className="text-gray-400">
               Manter conectado
             </label>
           </div>
-          <button className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center">
+          <button className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center" onClick={handleLogin}>
             <MdInput className="mr-2" />
             Entrar
           </button>
