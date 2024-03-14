@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import DarkModeSwitcher from "../../DarkModeSwitcher";
-
+import DarkModeSwitcher from "../../../../../components/DarkModeSwitcher";
 import SocialLoginButtons from "../SocialLoginButtons";
 import Divider from "../Divider";
 import LoginForm from "../LoginForm";
@@ -8,20 +6,12 @@ import OpenBannerButton from "../OpenBannerButton";
 import LoginHeader from "../LoginHeader";
 import WelcomeMessage from "../WelcomeMessage";
 
-import { LoginContainerProps } from "../../../screens/login/types";
+import { LoginContainerProps } from "./../../../types";
 
 export default function LoginContainer({
   bannerOpen,
   setBannerOpen,
 }: LoginContainerProps) {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const isDarkMode = localStorage.getItem("darkMode");
-    if (isDarkMode === "true") {
-      setDarkMode(true);
-    }
-  }, []);
 
   return (
     <>
@@ -33,12 +23,9 @@ export default function LoginContainer({
 
         <div className={`${bannerOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
           <div className="absolute right-5 top-5">
-            <DarkModeSwitcher
-              darkMode={darkMode}
-              setDarkMode={() => setDarkMode(!darkMode)}
-            />
+            <DarkModeSwitcher />
           </div>
-          <LoginHeader darkMode={darkMode} />
+          <LoginHeader />
           <WelcomeMessage />
           <SocialLoginButtons />
           <Divider />

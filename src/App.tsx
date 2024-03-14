@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import BannerContainer from "./components/Banner/BannerContainer";
-import LoginContainer from "./components/Login/LoginContainer";
+import BannerContainer from "./screens/login/components/Banner/BannerContainer";
+import LoginContainer from "./screens/login/components/Login/LoginContainer";
 
 export default function App() {
   const images = ["banner.png", "banner.png", "banner.png"];

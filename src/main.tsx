@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { ReactQueryProvider } from "./react-query-provider";
+import GlobalProvider from "./contexts/index";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ReactQueryProvider>
+    <GlobalProvider>
       <App />
-    </ReactQueryProvider>
+    </GlobalProvider>
   </React.StrictMode>
 );

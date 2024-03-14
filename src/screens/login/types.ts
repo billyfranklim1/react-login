@@ -23,18 +23,9 @@ export interface ImagePaginationProps {
   changeImage: (index: number) => void;
 }
 
-export interface DarkModeSwitcherProps {
-  darkMode: boolean;
-  setDarkMode: () => void;
-}
-
 export interface LoginContainerProps {
   bannerOpen: boolean;
   setBannerOpen: (open: boolean) => void;
-}
-
-export interface LoginHeaderProps {
-  darkMode: boolean;
 }
 
 export interface CloseBannerButtonProps {
