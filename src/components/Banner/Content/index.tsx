@@ -1,6 +1,6 @@
 import React from "react";
 
-function BannerContent() {
+function Content() {
   return (
     // <div className="absolute bottom-14 mx-5 flex flex-col items-center justify-center text-white">
     // </div>
@@ -29,4 +29,4 @@ function BannerContent() {
   );
 }
 
-export default BannerContent;
+export default Content;

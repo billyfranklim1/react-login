@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CloseBannerButton from "../CloseBannerButton";
-import BannerContent from "../BannerContent";
+import Content from "../Content";
 import Tag from "../Tag";
 import ImagePagination from "../ImagePagination";
 
@@ -31,7 +31,7 @@ const BannerContainer = ({ images, bannerOpen, setBannerOpen, currentIndex, setC
             <CloseBannerButton setBannerOpen={toggleBanner} />
             <div className="absolute bottom-14 mx-5 flex flex-col items-center justify-center text-white">
                 <div className="flex flex-col gap-4">
-                    <BannerContent />
+                    <Content />
                     <ImagePagination
                         totalImages={images.length}
                         currentIndex={currentIndex}
