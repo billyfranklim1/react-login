@@ -16,7 +16,7 @@ export const useBanner = () => useContext(BannerContext);
 export const BannerProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const images = ["banner.png", "banner.png", "banner.png"];
+  const images = ["banner.png", "banner-2.png", "banner-3.png"];
 
   const [isOpen, setOpen] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
