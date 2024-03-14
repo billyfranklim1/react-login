@@ -10,15 +10,16 @@ import { useBanner } from "../../../../../contexts/Banner/BannerContext";
 export default function LoginContainer() {
   const { isOpen } = useBanner();
 
+  // sm, md, lg, xl, 2xl
   return (
     <>
       <div
-        className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800	
-        ${isOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-5/12"} `}
+        className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800 	
+        ${isOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full lg:w-9/12 xl:w-7/12 2xl:w-5/12  "}`}
       >
         {!isOpen && <OpenBannerButton />}
 
-        <div className={`${isOpen ? "w-full" : "w-1/3 lg:w-full"}`}>
+        <div className={`${isOpen ? "w-full" : "w-full"}`}>
           <div className="absolute right-5 top-5">
             <DarkModeSwitcher />
           </div>
