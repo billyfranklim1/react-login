@@ -43,7 +43,7 @@ export default function LoginForm() {
               type="text"
               className={`w-full p-2 border ${
                 formik.touched.username && formik.errors.username
-                  ? "border-red-500"
+                  ? "border-red-500 dark:border-red-500"
                   : "border-neutral-800	"
               } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
               placeholder="Usuário"
@@ -65,7 +65,7 @@ export default function LoginForm() {
               type={showPassword ? "text" : "password"}
               className={`w-full p-2 border ${
                 formik.touched.password && formik.errors.password
-                  ? "border-red-500"
+                  ? "border-red-500 dark:border-red-500"
                   : "border-neutral-800	"
               } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
               placeholder="Senha"
