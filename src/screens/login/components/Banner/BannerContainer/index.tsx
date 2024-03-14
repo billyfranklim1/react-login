@@ -8,7 +8,7 @@ export default function BannerContainer() {
 
   return (
     <div
-      className={`bg-cover ${
+      className={`bg-cover  h-full ${
         isOpen ? "w-2/3" : "w-0"
       } hidden lg:block md:block`}
       style={{
@@ -17,7 +17,7 @@ export default function BannerContainer() {
       }}
     >
       {isOpen && (
-        <div className="relative h-full">
+        <div className="relative">
           <CloseBannerButton />
           <div className="absolute bottom-14 mx-5 flex flex-col items-center justify-center text-white">
             <div className="flex flex-col gap-4">
