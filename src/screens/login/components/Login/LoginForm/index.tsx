@@ -10,11 +10,15 @@ import {
 } from "react-icons/md";
 import { useLogin } from "./../../../hooks/useLogin";
 import { useTranslation } from "react-i18next";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function LoginForm() {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
+
+  const TOKEN = import.meta.env.VITE_REACT_APP_HCAPTCHA_SITE_KEY;
 
   const { loginMutation: login } = useLogin();
 
@@ -32,6 +36,10 @@ export default function LoginForm() {
     validateOnBlur: false,
     validateOnChange: false,
   });
+
+  const onCaptchaVerify = (token: string): void => {
+    setCaptchaToken(token);
+  };
 
   return (
     <>
@@ -89,6 +97,9 @@ export default function LoginForm() {
           {formik.touched.password && formik.errors.password ? (
             <div className="text-red-500 mt-2">{formik.errors.password}</div>
           ) : null}
+        </div>
+        <div className="mt-4 flex justify-center">
+          <HCaptcha sitekey={TOKEN} onVerify={onCaptchaVerify} />
         </div>
         <div className="mt-4 flex items-center">
           <input type="checkbox" id="stayConnected" className="mr-2" />
