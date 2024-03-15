@@ -6,7 +6,7 @@ export default function LoginHeader() {
   const { t } = useTranslation();
 
   return (
-    <div className="mt-5 flex justify-between select-none">
+    <div className="my-10 flex justify-between select-none">
       <img
         alt=""
         className="h-8"

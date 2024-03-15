@@ -24,7 +24,7 @@ export default function LoginContainer() {
         {!isOpen && <OpenBannerButton />}
 
         <div className={`${isOpen ? "w-full" : "w-full"}`}>
-          <div className="flex justify-between mt-5">
+          <div className="flex justify-between align-center my-5">
             <LanguageSelector />
             <DarkModeSwitcher />
           </div>

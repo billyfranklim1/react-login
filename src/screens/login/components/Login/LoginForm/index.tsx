@@ -93,14 +93,14 @@ export default function LoginForm() {
             <div className="text-red-500 mt-2">{formik.errors.password}</div>
           ) : null}
         </div>
-        <div className="mt-4 flex justify-center">
-          <HCaptcha sitekey={TOKEN} />
-        </div>
         <div className="mt-4 flex items-center">
           <input type="checkbox" id="stayConnected" className="mr-2" />
           <label htmlFor="stayConnected" className="text-gray-400">
             {t("login.keepMeLoggedIn")}
           </label>
+        </div>
+        <div className="mt-4 flex justify-center">
+          <HCaptcha sitekey={TOKEN} />
         </div>
         <button
           className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
@@ -110,7 +110,7 @@ export default function LoginForm() {
           {t("login.signIn")}
         </button>
       </form>
-      <div className="mt-10 flex justify-center">
+      <div className="my-10 flex justify-center">
         <a href="#" className="text-center text-sm text-gray-400">
           <span>
             {t("login.forgotPassword")}
