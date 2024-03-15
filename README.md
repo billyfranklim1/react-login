@@ -1,5 +1,5 @@
 <p align="center">
-  <h3 align="center">Login</h3>
+  <h1 align="center">Login ReactJs Responsivo</h1>
   <div align="center">
    <table>
       <tr>
@@ -18,18 +18,22 @@
   </div>
 </p>
 
+## 🌐 Demonstração
+
+Para uma visualização rápida, acesse a aplicação demo através deste [link](https://react-login-five-chi.vercel.app/). Lembre-se de que esta é uma versão de demonstração que pode não refletir totalmente as funcionalidades do projeto.
+
 ## 📘 Sobre o Projeto
 
-Este projeto é uma aplicação web de login responsivo, desenvolvido com React Js e TypeScript. O layout foi criado no Figma e a aplicação foi desenvolvida com base no layout fornecido. 
+Este projeto é uma aplicação web de login responsivo, desenvolvido com React Js e TypeScript. O layout foi criado no Figma e a aplicação foi desenvolvida com base no layout fornecido.
 
 # 📚 Funcionalidades
+
 - [x] Login com autenticação integrado com API, o repósitorio da API pode ser encontrado [aqui](https://github.com/billyfranklim1/api-login)
 - [x] Responsividade
 - [x] Internacionalização (i18n) com suporte a inglês, português, espanhol e francês
 - [x] Dark Mode
 - [x] Toasts de notificação
 - [x] Animações
-
 
 ## 🎨 Layout
 
@@ -79,7 +83,7 @@ Siga estes passos para configurar o projeto localmente:
 
    ```bash
    NEXT_PUBLIC_API_URL=https://api-login.billy.dev.br
-   
+
    VITE_REACT_APP_HCAPTCHA_SITE_KEY=your-hcaptcha-site-key
    ```
 
@@ -87,11 +91,6 @@ Siga estes passos para configurar o projeto localmente:
    ```bash
    npm run dev
    ```
-   Acesse `http://localhost:3000` para visualizar a aplicação.
-
-## 🌐 Demonstração
-
-Para uma visualização rápida, acesse a aplicação demo através deste [link](). Lembre-se de que esta é uma versão de demonstração que pode não refletir totalmente as funcionalidades do projeto.
 
 ## 🤝 Como Contribuir
 
