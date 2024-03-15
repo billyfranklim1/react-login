@@ -8,6 +8,7 @@ import {
   MdVisibilityOff,
   MdVisibility,
 } from "react-icons/md";
+import { AiOutlineLoading } from "react-icons/ai";
 import { useLogin } from "./../../../hooks/useLogin";
 import { useTranslation } from "react-i18next";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
@@ -16,6 +17,7 @@ export default function LoginForm() {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const TOKEN = import.meta.env.VITE_REACT_APP_HCAPTCHA_SITE_KEY;
 
@@ -30,9 +32,14 @@ export default function LoginForm() {
         .required(t("formValidation.passwordRequired")),
     }),
     onSubmit: (values, { setFieldError }) => {
+      setIsLoading(true);
       loginMutation.mutate(values, {
+        onSuccess: () => {
+          setIsLoading(false);
+        },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onError: (error : any) => {
+        onError: (error: any) => {
+          setIsLoading(false);
           if (error.response && error.response.data.error)
             setFieldError("password", error.response.data.error);
 
@@ -53,8 +60,8 @@ export default function LoginForm() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} autoComplete="new-password">
-        <div className="mt-4">
+      <form onSubmit={formik.handleSubmit} autoComplete="new-password" className="my-3">
+        <div className="mt-3">
           <label className="block text-gray-400">{t("login.username")}</label>
           <div className="mt-2 relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
@@ -72,11 +79,13 @@ export default function LoginForm() {
               {...formik.getFieldProps("username")}
             />
           </div>
-          {formik.touched.username && formik.errors.username ? (
-            <div className="text-red-500 mt-2">{formik.errors.username}</div>
-          ) : null}
+          <div className="text-red-500 h-5">
+            {formik.errors.username && formik.errors.username ? (
+              <div>{formik.errors.username}</div>
+            ) : null}
+          </div>
         </div>
-        <div className="mt-4">
+        <div className="mt-3">
           <label className="block text-gray-400">{t("login.password")}</label>
           <div className="mt-2 relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
@@ -104,28 +113,37 @@ export default function LoginForm() {
               )}
             </span>
           </div>
-          {formik.touched.password && formik.errors.password ? (
-            <div className="text-red-500 mt-2">{formik.errors.password}</div>
-          ) : null}
+          <div className="text-red-500 h-5">
+            {formik.errors.password && formik.errors.password ? (
+              <div>{formik.errors.password}</div>
+            ) : null}
+          </div>
         </div>
-        <div className="mt-4 flex items-center">
+        <div className="mt-3 flex items-center">
           <input type="checkbox" id="stayConnected" className="mr-2" />
           <label htmlFor="stayConnected" className="text-gray-400">
             {t("login.keepMeLoggedIn")}
           </label>
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-3 flex justify-center">
           <HCaptcha sitekey={TOKEN} />
         </div>
         <button
-          className="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
+          className="w-full mt-3 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
           type="submit"
+          disabled={isLoading}
         >
-          <MdInput className="mr-2" />
-          {t("login.signIn")}
+          {isLoading ? (
+            <AiOutlineLoading className="animate-spin mr-2" />
+          ) : (
+            <>
+              <MdInput className="mr-2" />
+              {t("login.signIn")}
+            </>
+          )}
         </button>
       </form>
-      <div className="my-10 flex justify-center">
+      <div className="flex justify-center my-5">
         <a href="#" className="text-center text-sm text-gray-400">
           <span>
             {t("login.forgotPassword")}
