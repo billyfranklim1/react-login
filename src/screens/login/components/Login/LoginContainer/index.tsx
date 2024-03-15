@@ -6,11 +6,11 @@ import OpenBannerButton from "../OpenBannerButton";
 import LoginHeader from "../LoginHeader";
 import WelcomeMessage from "../WelcomeMessage";
 import { useBanner } from "../../../../../contexts/Banner/BannerContext";
+import LanguageSelector from "../../../../../components/LanguageSelector/index";
 
 export default function LoginContainer() {
   const { isOpen } = useBanner();
 
-  // sm, md, lg, xl, 2xl
   return (
     <>
       <div
@@ -20,7 +20,10 @@ export default function LoginContainer() {
         {!isOpen && <OpenBannerButton />}
 
         <div className={`${isOpen ? "w-full" : "w-full"}`}>
-          <div className="absolute right-5 top-5">
+          {/* <div className="absolute right-5 top-5"> */}
+          <div className="flex justify-between mt-5">
+
+          <LanguageSelector />
             <DarkModeSwitcher />
           </div>
           <LoginHeader />

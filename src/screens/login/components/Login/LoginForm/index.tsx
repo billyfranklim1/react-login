@@ -9,8 +9,11 @@ import {
   MdVisibility,
 } from "react-icons/md";
 import { useLogin } from "./../../../hooks/useLogin";
+import { useTranslation } from "react-i18next";
 
 export default function LoginForm() {
+  const { t } = useTranslation();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const { loginMutation: login } = useLogin();
@@ -18,10 +21,10 @@ export default function LoginForm() {
   const formik = useFormik({
     initialValues: { username: "", password: "" },
     validationSchema: Yup.object({
-      username: Yup.string().required("O usuário é obrigatório"),
+      username: Yup.string().required(t("formValidation.usernameRequired")),
       password: Yup.string()
-        .min(6, "A senha deve ter pelo menos 6 caracteres")
-        .required("A senha é obrigatória"),
+        .min(6, t("formValidation.passwordMinLength"))
+        .required(t("formValidation.passwordRequired")),
     }),
     onSubmit: (values) => {
       login.mutate(values);
@@ -34,7 +37,7 @@ export default function LoginForm() {
     <>
       <form onSubmit={formik.handleSubmit} autoComplete="new-password">
         <div className="mt-10">
-          <label className="block text-gray-400">Usuário</label>
+          <label className="block text-gray-400">{t("login.username")}</label>
           <div className="mt-2 relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
               <MdPersonOutline size={20} />
@@ -46,7 +49,7 @@ export default function LoginForm() {
                   ? "border-red-500 dark:border-red-500"
                   : "border-neutral-800	"
               } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
-              placeholder="Usuário"
+              placeholder={t("login.username")}
               autoComplete="new-password"
               {...formik.getFieldProps("username")}
             />
@@ -56,7 +59,7 @@ export default function LoginForm() {
           ) : null}
         </div>
         <div className="mt-4">
-          <label className="block text-gray-400">Senha</label>
+          <label className="block text-gray-400">{t("login.password")}</label>
           <div className="mt-2 relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
               <MdLockOutline size={20} />
@@ -68,7 +71,7 @@ export default function LoginForm() {
                   ? "border-red-500 dark:border-red-500"
                   : "border-neutral-800	"
               } rounded-lg pl-10 focus:outline-none dark:bg-neutral-800	 dark:text-white dark:border-gray-600`}
-              placeholder="Senha"
+              placeholder={t("login.password")}
               autoComplete="new-password"
               {...formik.getFieldProps("password")}
             />
@@ -90,7 +93,7 @@ export default function LoginForm() {
         <div className="mt-4 flex items-center">
           <input type="checkbox" id="stayConnected" className="mr-2" />
           <label htmlFor="stayConnected" className="text-gray-400">
-            Manter conectado
+            {t("login.keepMeLoggedIn")}
           </label>
         </div>
         <button
@@ -98,13 +101,16 @@ export default function LoginForm() {
           type="submit"
         >
           <MdInput className="mr-2" />
-          Entrar
+          {t("login.signIn")}
         </button>
       </form>
       <div className="mt-10 flex justify-center">
         <a href="#" className="text-center text-sm text-gray-400">
-          Esqueceu sua senha ? {""}
-          <span className="text-blue-600">Recuperar senha</span>
+          <span>
+            {t("login.forgotPassword")}
+            {""}{" "}
+          </span>
+          <span className="text-blue-600">{t("login.recoverPassword")}</span>
         </a>
       </div>
     </>

@@ -1,7 +1,9 @@
 import { useDarkMode } from "../../../../../contexts/DarkMode/DarkModeContext";
+import { useTranslation } from "react-i18next";
 
 export default function LoginHeader() {
   const { isDarkMode } = useDarkMode();
+  const { t } = useTranslation();
 
   return (
     <div className="mt-16 flex justify-between select-none">
@@ -11,7 +13,7 @@ export default function LoginHeader() {
         src={`${!isDarkMode ? "logo-light.png" : "logo-dark.png"}`}
       />
       <a href="" className="text-blue-500">
-        Criar conta
+        {t("login.createAccount")}
       </a>
     </div>
   );
