@@ -1,4 +1,3 @@
-import React from 'react';
 import CloseBannerButton from "../CloseBannerButton";
 import Content from "../Content";
 import ImagePagination from "../ImagePagination";
