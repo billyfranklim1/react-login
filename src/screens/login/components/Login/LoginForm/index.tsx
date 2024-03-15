@@ -16,7 +16,7 @@ export default function LoginForm() {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState("");
+  const [setCaptchaToken] = useState("");
 
   const TOKEN = import.meta.env.VITE_REACT_APP_HCAPTCHA_SITE_KEY;
 
