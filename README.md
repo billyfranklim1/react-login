@@ -1,19 +1,41 @@
 <p align="center">
   <h3 align="center">Login</h3>
   <div align="center">
-    <img src="./public/preview.png" width="500px" alt="Preview login responsivo">
+   <table>
+      <tr>
+         <td>Desktop</td>
+         <td>Mobile</td>
+      </tr>
+      <tr>
+         <td>
+            <img src="./public/preview.png" alt="Preview login responsivo" height="300px">
+         </td>
+         <td>
+            <img src="./public/preview-mobile.png" alt="Preview login responsivo" height="300px">
+         </td>
+      </tr>
+   </table>
   </div>
 </p>
 
 ## 📘 Sobre o Projeto
 
-Este projeto é uma aplicação web de login responsivo, desenvolvido com React Js e TypeScript. O layout foi criado no Figma e a aplicação foi desenvolvida com base no layout fornecido.
+Este projeto é uma aplicação web de login responsivo, desenvolvido com React Js e TypeScript. O layout foi criado no Figma e a aplicação foi desenvolvida com base no layout fornecido. 
+
+# 📚 Funcionalidades
+- [x] Login com autenticação integrado com API, o repósitorio da API pode ser encontrado [aqui](https://github.com/billyfranklim1/api-login)
+- [x] Responsividade
+- [x] Internacionalização (i18n) com suporte a inglês, português, espanhol e francês
+- [x] Dark Mode
+- [x] Toasts de notificação
+- [x] Animações
+
 
 ## 🎨 Layout
 
 O layout foi cuidadosamente projetado para oferecer uma excelente experiência ao usuário. O layout foi criado no Figma e pode ser acessado através do link abaixo:
 
-- [Acessar Layout no Figma]()
+- [Acessar Layout no Figma](https://www.figma.com/file/rMJhp5D79wnmq6h7r27cmv/Login---Teste?type=design&node-id=1%3A14027&mode=design&t=a5Gfvwa0lznfNflz-1)
 
 ## 💻 Tecnologias e Bibliotecas
 
@@ -25,7 +47,6 @@ Este projeto foi desenvolvido utilizando-se das seguintes tecnologias e bibliote
 - React Query
 - React Toastify
 - React I18next
-- React Loading Skeleton
 - Framer Motion
 
 ## 🚧 Pré-requisitos
@@ -57,7 +78,9 @@ Siga estes passos para configurar o projeto localmente:
    Renomeie o arquivo `.env.example` para `.env` e ajuste as variáveis conforme necessário.
 
    ```bash
-   NEXT_PUBLIC_API_URL=https://localhost:3001
+   NEXT_PUBLIC_API_URL=https://api-login.billy.dev.br
+   
+   VITE_REACT_APP_HCAPTCHA_SITE_KEY=your-hcaptcha-site-key
    ```
 
 4. **Iniciar o Projeto:**
