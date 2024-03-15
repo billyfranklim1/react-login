@@ -39,7 +39,7 @@ export default function LoginForm() {
   return (
     <>
       <form onSubmit={formik.handleSubmit} autoComplete="new-password">
-        <div className="mt-10">
+        <div className="mt-4">
           <label className="block text-gray-400">{t("login.username")}</label>
           <div className="mt-2 relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 dark:text-white">
