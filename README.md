@@ -22,6 +22,12 @@
 
 Para uma visualização rápida, acesse a aplicação demo através deste [link](https://react-login-five-chi.vercel.app/). Lembre-se de que esta é uma versão de demonstração que pode não refletir totalmente as funcionalidades do projeto.
 
+Você pode usar as seguintes credenciais para fazer login:
+- **Usuário:** test
+- **Senha:** password
+
+
+
 ## 📘 Sobre o Projeto
 
 Este projeto é uma aplicação web de login responsivo, desenvolvido com React Js e TypeScript. O layout foi criado no Figma e a aplicação foi desenvolvida com base no layout fornecido.
