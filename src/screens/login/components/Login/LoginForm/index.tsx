@@ -16,7 +16,6 @@ export default function LoginForm() {
   const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [setCaptchaToken] = useState("");
 
   const TOKEN = import.meta.env.VITE_REACT_APP_HCAPTCHA_SITE_KEY;
 
@@ -36,10 +35,6 @@ export default function LoginForm() {
     validateOnBlur: false,
     validateOnChange: false,
   });
-
-  const onCaptchaVerify = (token: string): void => {
-    setCaptchaToken(token);
-  };
 
   return (
     <>
@@ -99,7 +94,7 @@ export default function LoginForm() {
           ) : null}
         </div>
         <div className="mt-4 flex justify-center">
-          <HCaptcha sitekey={TOKEN} onVerify={onCaptchaVerify} />
+          <HCaptcha sitekey={TOKEN} />
         </div>
         <div className="mt-4 flex items-center">
           <input type="checkbox" id="stayConnected" className="mr-2" />
