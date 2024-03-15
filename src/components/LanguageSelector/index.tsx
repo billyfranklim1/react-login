@@ -5,7 +5,7 @@ import "/node_modules/flag-icons/css/flag-icons.min.css";
 const CustomDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("us");
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const languages = [
     { code: "br", name: "Português" },
@@ -20,14 +20,14 @@ const CustomDropdown = () => {
     if (lng) {
       i18n.changeLanguage(lng);
       setSelectedLanguage(lng);
-    }else{
+    } else {
       i18n.changeLanguage("br");
       setSelectedLanguage("br");
       localStorage.setItem("i18nextLng", "br");
     }
 
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as HTMLElement)) {
         setIsOpen(false);
       }
     };
@@ -37,7 +37,7 @@ const CustomDropdown = () => {
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleLanguageChange = (lng) => {
+  const handleLanguageChange = (lng: string): void => {
     i18n.changeLanguage(lng);
     setSelectedLanguage(lng);
     setIsOpen(false);

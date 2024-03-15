@@ -15,15 +15,17 @@ export default function LoginContainer() {
     <>
       <div
         className={`h-full px-10 md:w-full w-full flex justify-center dark:bg-neutral-800 	
-        ${isOpen ? "md:w-1/3 w-full lg:w-1/3" : "w-full md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12  "}`}
+        ${
+          isOpen
+            ? "md:w-1/3 w-full lg:w-1/3"
+            : "w-full md:w-8/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12  "
+        }`}
       >
         {!isOpen && <OpenBannerButton />}
 
         <div className={`${isOpen ? "w-full" : "w-full"}`}>
-          {/* <div className="absolute right-5 top-5"> */}
           <div className="flex justify-between mt-5">
-
-          <LanguageSelector />
+            <LanguageSelector />
             <DarkModeSwitcher />
           </div>
           <LoginHeader />
