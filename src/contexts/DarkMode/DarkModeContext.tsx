@@ -6,6 +6,7 @@ const DarkModeContext = createContext<DarkModeContextType>({
   toggleDarkMode: () => {},
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useDarkMode = () => useContext(DarkModeContext);
 
 export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {

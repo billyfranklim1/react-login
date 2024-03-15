@@ -11,6 +11,7 @@ const BannerContext = createContext<BannerContextType>({
   prevImage: () => {},
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useBanner = () => useContext(BannerContext);
 
 export const BannerProvider: React.FC<{ children: React.ReactNode }> = ({
