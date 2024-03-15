@@ -129,7 +129,7 @@ export default function LoginForm() {
           <HCaptcha sitekey={TOKEN} />
         </div>
         <button
-          className="w-full mt-3 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
+          className="w-full mt-3 h-9 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center justify-center "
           type="submit"
           disabled={isLoading}
         >

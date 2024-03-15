@@ -9,7 +9,8 @@
     "signIn" : "Se connecter",
     "forgotPassword" : "Mot de passe oublié ?",
     "recoverPassword" : "Récupérer le mot de passe",
-    "or" : "ou"
+    "or" : "ou",
+    "success" : "Connexion réussie"
   },
   "formValidation": {
     "usernameRequired" : "L'utilisateur est requis",

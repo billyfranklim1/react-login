@@ -9,7 +9,8 @@
     "signIn" : "Entrar",
     "forgotPassword" : "Esqueceu a senha?",
     "recoverPassword" : "Recuperar Senha",
-    "or" : "ou"
+    "or" : "ou",
+    "success" : "Login efetuado com sucesso"
   },
   "formValidation": {
     "usernameRequired" : "Usuário é obrigatório",

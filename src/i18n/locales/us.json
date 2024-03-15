@@ -9,7 +9,8 @@
     "signIn" : "Sign In",
     "forgotPassword" : "Forgot Password?",
     "recoverPassword" : "Recover Password",
-    "or" : "or"
+    "or" : "or",
+    "success" : "You have successfully logged in"
   },
   "formValidation": {
     "usernameRequired" : "Username is required",

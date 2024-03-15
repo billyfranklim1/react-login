@@ -9,7 +9,8 @@
     "signIn" : "Iniciar Sesión",
     "forgotPassword" : "¿Olvidaste la contraseña?",
     "recoverPassword" : "Recuperar Contraseña",
-    "or" : "o"
+    "or" : "o",
+    "success" : "¡Has iniciado sesión con éxito!"
   },
   "formValidation": {
     "usernameRequired" : "Usuario es obligatorio",
