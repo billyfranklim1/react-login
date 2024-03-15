@@ -19,7 +19,7 @@ export default function LoginForm() {
 
   const TOKEN = import.meta.env.VITE_REACT_APP_HCAPTCHA_SITE_KEY;
 
-  const { loginMutation: login } = useLogin();
+  const { loginMutation } = useLogin();
 
   const formik = useFormik({
     initialValues: { username: "", password: "" },
@@ -29,8 +29,23 @@ export default function LoginForm() {
         .min(6, t("formValidation.passwordMinLength"))
         .required(t("formValidation.passwordRequired")),
     }),
-    onSubmit: (values) => {
-      login.mutate(values);
+    onSubmit: (values, { setFieldError }) => {
+      loginMutation.mutate(values, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (error : any) => {
+          if (error.response && error.response.data.error)
+            setFieldError("password", error.response.data.error);
+
+          if (error.response && error.response.data.errors) {
+            const { errors } = error.response.data;
+
+            for (const key in errors) {
+              const message = errors[key].join(", ");
+              setFieldError(key, message);
+            }
+          }
+        },
+      });
     },
     validateOnBlur: false,
     validateOnChange: false,
